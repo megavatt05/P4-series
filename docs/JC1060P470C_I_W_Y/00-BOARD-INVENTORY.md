@@ -96,14 +96,15 @@
 | № | Модуль | Ветка | Критерий успеха |
 |---|--------|-------|-----------------|
 | 1 | **Дисплей + подсветка** | `example/display-jd9165` | Картинка / цветной экран, регулировка яркости |
-| 2 | **Тач GT911** | (вместе с дисплеем или отдельно) | Координаты в логе / реакция LVGL |
+| 2 | **Тач GT911** | `example/touch-gt911` | Координаты в логе / реакция LVGL |
 | 3 | **SD-карта** | `example/sd-card` | mount + list + write/read (Wi-Fi выкл.) |
 | 4 | **Камера** | `example/camera` | кадр / preview на дисплее |
 | 5 | **Wi-Fi (C6)** | `example/wifi-c6` | подключение к AP, ping |
 | 6 | **Ethernet** | `example/ethernet` | DHCP, ping |
-| 7 | **Аудио ES8311** | `example/audio` | воспроизведение + микрофон |
+| 7 | **Аудио ES8311** | `example/audio-es8311` | воспроизведение + микрофон |
 | 8 | **RS-485** | `example/rs485` | echo |
-| 9 | **Комплекс** | `example/all` / xiaozhi | всё вместе с учётом конфликтов |
+| 9 | **USB** | `example/usb` | serial / JTAG log |
+| 10 | **Комплекс** | xiaozhi / example/all | всё вместе с учётом конфликтов |
 
 ---
 
@@ -113,11 +114,15 @@
 |-------|----------|
 | `master` | Оригинал Guition |
 | `docs/board-inventory` | Документация, пины, чек-листы |
-| `example/display-jd9165` | Минимальный тест дисплея |
-| `example/sd-card` | Тест TF-карты |
-| `example/camera` | Тест камеры |
-| `example/wifi-c6` | Тест Wi-Fi через C6 |
-| `example/ethernet` | Тест Ethernet |
+| `example/display-jd9165` | Дисплей JD9165 + подсветка |
+| `example/touch-gt911` | Тач GT911 |
+| `example/sd-card` | TF/SD |
+| `example/camera` | Камера MIPI-CSI |
+| `example/wifi-c6` | Wi-Fi / BLE через C6 |
+| `example/ethernet` | Ethernet IP101 |
+| `example/audio-es8311` | Аудио ES8311 + PA |
+| `example/rs485` | RS-485 |
+| `example/usb` | USB-C / Serial / JTAG |
 
 ---
 
@@ -133,16 +138,17 @@
 
 ## 6. Статус проверок
 
-| Модуль | Статус | Дата | Примечание |
-|--------|--------|------|----------|
-| Дисплей JD9165 | ⏳ не проверен | | |
-| Тач GT911 | ⏳ | | |
-| SD-карта | ⏳ | | |
-| Камера | ⏳ | | |
-| Wi-Fi C6 | ⏳ | | |
-| Ethernet | ⏳ | | |
-| Аудио ES8311 | ⏳ | | |
-| RS-485 | ⏳ | | |
+| Модуль | Ветка | Статус | Дата | Примечание |
+|--------|-------|--------|------|----------|
+| Дисплей JD9165 | `example/display-jd9165` | ⏳ не проверен | | |
+| Тач GT911 | `example/touch-gt911` | ⏳ | | |
+| SD-карта | `example/sd-card` | ⏳ | | |
+| Камера | `example/camera` | ⏳ | | |
+| Wi-Fi C6 | `example/wifi-c6` | ⏳ | | |
+| Ethernet | `example/ethernet` | ⏳ | | |
+| Аудио ES8311 | `example/audio-es8311` | ⏳ | | |
+| RS-485 | `example/rs485` | ⏳ | | |
+| USB | `example/usb` | ⏳ | | |
 
 ---
 
