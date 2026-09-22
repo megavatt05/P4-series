@@ -9,6 +9,8 @@
 #include "esp_log.h"
 #include "esp_err.h"
 #include "esp_check.h"
+#include "esp_heap_caps.h"
+#include "esp_idf_version.h"
 #include "esp_ldo_regulator.h"
 #include "esp_lcd_mipi_dsi.h"
 #include "esp_lcd_panel_ops.h"
@@ -84,7 +86,6 @@ static esp_err_t display_init(void)
 
     /* 2) DSI bus (2-lane) */
     esp_lcd_dsi_bus_config_t bus_cfg = JD9165_PANEL_BUS_DSI_2CH_CONFIG();
-    /* Guition demos often use ~550–900 Mbps; start with component default, lower if unstable */
     ESP_RETURN_ON_ERROR(esp_lcd_new_dsi_bus(&bus_cfg, &s_dsi_bus), TAG, "dsi bus");
 
     /* 3) DBI panel IO */
@@ -116,14 +117,12 @@ static esp_err_t display_init(void)
     ESP_RETURN_ON_ERROR(esp_lcd_new_panel_jd9165(io, &panel_cfg, &s_panel), TAG, "jd9165");
     ESP_RETURN_ON_ERROR(esp_lcd_panel_reset(s_panel), TAG, "reset");
     ESP_RETURN_ON_ERROR(esp_lcd_panel_init(s_panel), TAG, "init");
-    /* Some panels need display on explicitly */
     esp_lcd_panel_disp_on_off(s_panel, true);
 
     ESP_LOGI(TAG, "Display init OK (%dx%d RGB565)", LCD_H_RES, LCD_V_RES);
     return ESP_OK;
 }
 
-/* Fill full screen with solid RGB565 color (slow CPU path — ok for bring-up) */
 static void fill_color(uint16_t color)
 {
     const size_t lines = 20;
@@ -139,8 +138,8 @@ static void fill_color(uint16_t color)
     for (size_t i = 0; i < buf_pixels; i++) {
         buf[i] = color;
     }
-    for (int y = 0; y < LCD_V_RES; y += lines) {
-        int h = lines;
+    for (int y = 0; y < LCD_V_RES; y += (int)lines) {
+        int h = (int)lines;
         if (y + h > LCD_V_RES) {
             h = LCD_V_RES - y;
         }
